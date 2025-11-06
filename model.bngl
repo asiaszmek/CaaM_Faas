@@ -1,0 +1,57 @@
+begin parameters
+  um2s_to_cm2s 1e-8
+  uM_1_to_M_1 1e6
+  uM_in_um3  602/4	
+  MCELL_DIFFUSION_CONSTANT_3D_Ca  200*um2s_to_cm2s
+  MCELL_DIFFUSION_CONSTANT_3D_CaM 4*um2s_to_cm2s
+  #Mahajan and Nadkarni 2019 constants: #in MCell's native units 1/M/s and 1/s (affinities very similar to Faas, just slower constants)
+  kon1c     6.8e6
+  koff1c    68
+  kon1n     108e6
+  koff1n    4150
+  kon2c     6.8e6
+  koff2c    10
+  kon2n     108e6
+  koff2n    800
+
+end parameters
+
+begin compartments
+  PM 2 0
+  box 3 1/4 PM
+end compartments  
+
+begin molecule types
+  Ca 
+  CaM(C~0~1~2,N~0~1~2)
+end molecule types
+
+begin species
+  CaM(C~0,N~0)@box   123*uM_in_um3
+  Ca@box     1.88*uM_in_um3
+end species
+
+begin observables
+  Molecules CaM0  CaM(C~0,N~0)
+  Molecules CaM1C CaM(C~1,N~0)
+  Molecules CaM2C CaM(C~2,N~0)
+  Molecules CaM1N CaM(C~0,N~1)
+  Molecules CaM2N CaM(C~0,N~2)
+  Molecules CaM1C1N CaM(C~1,N~1)
+  Molecules CaM2C1N CaM(C~2,N~1)  
+  Molecules CaM1C2N CaM(C~1,N~2)
+  Molecules CaM4 CaM(C~2,N~2)
+end observables
+
+
+begin reaction rules
+ r_RyR2CaM_ctrl_3a: Ca + CaM(C~0) -> CaM(C~1) kon1c
+ r_RyR2CaM_ctrl_3b: CaM(C~1) -> Ca + CaM(C~0) koff1c	
+ r_RyR2CaM_ctrl_4a: Ca + CaM(N~0) -> CaM(N~1) kon1n
+ r_RyR2CaM_ctrl_4b: CaM(N~1) -> Ca + CaM(N~0) koff1n
+ r_RyR2CaM_ctrl_5a: Ca + CaM(C~1) -> CaM(C~2) kon2c
+ r_RyR2CaM_ctrl_5b: CaM(C~2) -> Ca + CaM(C~1) koff2c
+ r_RyR2CaM_ctrl_6a: Ca + CaM(N~1) -> CaM(N~2) kon2n
+ r_RyR2CaM_ctrl_6b: CaM(N~2) -> Ca + CaM(N~1) koff2n
+end reaction rules
+
