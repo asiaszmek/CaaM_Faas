@@ -19,10 +19,6 @@ begin parameters
 
     Ca_ECS_IC 0
 
-    Bf_IC 4791
-
-    Bm_IC 2e-5
-
     n_NMDAR 56
 
     NMDAR_IC 150
@@ -39,15 +35,6 @@ begin parameters
 
     SERCA_IC 1000
 
-    k_CaBm_f 1e6
-
-    k_CaBm_r 1
-
-    k_Ca_N 50
-
-    k_Ca_Bf_f 1e6
-
-    k_Ca_Bf_r 2
 
     k_SA_leak 0.1608
 
@@ -179,10 +166,7 @@ end parameters
 
 begin molecule types
     Ca2
-    Bm
-    CaBm
-    Bf
-    CaBf
+  
     VSCC
     PMCA
     PMCA1
@@ -224,10 +208,7 @@ begin molecule types
 end molecule types
 
 begin reaction rules
-    Ca2 + Bm <-> CaBm k_CaBm_f, k_CaBm_r
-    Ca2Null: Ca2 -> 0 k_Ca_N
-    Ca2@IN + Bf <-> CaBf k_Ca_Bf_f, k_Ca_Bf_r
-#     reaction 'rxn_VSCC' was generated as Python code because it contains features not supported by BNGL
+#     reaction 'rxn_VSCC' was generated as Python code because it contains features not supported by BNGL -- this will be found in parameters.py
     Ca2@IN + PMCA <-> PMCA1 k_PMCA_1, k_PMCA_2
     rxn_PMCA: PMCA1 -> PMCA k_PMCA_3
     rxn_PMCA_leak: PMCA -> PMCA + Ca2@IN k_PMCA_leak
@@ -270,54 +251,5 @@ begin reaction rules
 #     reaction '' was generated as Python code because it contains features not supported by BNGL
 #     reaction '' was generated as Python code because it contains features not supported by BNGL
 #     reaction 'rxn_SERCA_leak' was generated as Python code because it contains features not supported by BNGL
-    RyR_C(a~0) + Ca2@OUT <-> RyR_C(a~1) 4*k_AB, 1*k_AU
-    RyR_C(a~1) + Ca2@OUT <-> RyR_C(a~2) 3*k_AB, 2*k_AU
-    RyR_C(a~2) + Ca2@OUT <-> RyR_C(a~3) 2*k_AB, 3*k_AU
-    RyR_C(a~3) + Ca2@OUT <-> RyR_C(a~4) 1*k_AB, 4*k_AU
-    RyR_C(i~0) + Ca2@OUT <-> RyR_C(i~1) 4*k_IC, 1*k_IU
-    RyR_C(i~1) + Ca2@OUT <-> RyR_C(i~2) 3*k_IC, 2*k_IU
-    RyR_C(i~2) + Ca2@OUT <-> RyR_C(i~3) 2*k_IC, 3*k_IU
-    RyR_C(i~3) + Ca2@OUT <-> RyR_C(i~4) 1*k_IC, 4*k_IU
-    RyR_O(a~0) + Ca2@OUT <-> RyR_O(a~1) 4*k_AB, 1*k_AU
-    RyR_O(a~1) + Ca2@OUT <-> RyR_O(a~2) 3*k_AB, 2*k_AU
-    RyR_O(a~2) + Ca2@OUT <-> RyR_O(a~3) 2*k_AB, 3*k_AU
-    RyR_O(a~3) + Ca2@OUT <-> RyR_O(a~4) 1*k_AB, 4*k_AU
-    RyR_O(i~0) + Ca2@OUT <-> RyR_O(i~1) 4*k_IO, 1*k_IU
-    RyR_O(i~1) + Ca2@OUT <-> RyR_O(i~2) 3*k_IO, 2*k_IU
-    RyR_O(i~2) + Ca2@OUT <-> RyR_O(i~3) 2*k_IO, 3*k_IU
-    RyR_O(i~3) + Ca2@OUT <-> RyR_O(i~4) 1*k_IO, 4*k_IU
-    RyR_CI(a~0) + Ca2@OUT <-> RyR_CI(a~1) 4*k_AB, 1*k_AU
-    RyR_CI(a~1) + Ca2@OUT <-> RyR_CI(a~2) 3*k_AB, 2*k_AU
-    RyR_CI(a~2) + Ca2@OUT <-> RyR_CI(a~3) 2*k_AB, 3*k_AU
-    RyR_CI(a~3) + Ca2@OUT <-> RyR_CI(a~4) 1*k_AB, 4*k_AU
-    RyR_CI(i~0) + Ca2@OUT <-> RyR_CI(i~1) 4*k_IC, 1*k_IU
-    RyR_CI(i~1) + Ca2@OUT <-> RyR_CI(i~2) 3*k_IC, 2*k_IU
-    RyR_CI(i~2) + Ca2@OUT <-> RyR_CI(i~3) 2*k_IC, 3*k_IU
-    RyR_CI(i~3) + Ca2@OUT <-> RyR_CI(i~4) 1*k_IC, 4*k_IU
-    RyR_OI(a~0) + Ca2@OUT <-> RyR_OI(a~1) 4*k_AB, 1*k_AU
-    RyR_OI(a~1) + Ca2@OUT <-> RyR_OI(a~2) 3*k_AB, 2*k_AU
-    RyR_OI(a~2) + Ca2@OUT <-> RyR_OI(a~3) 2*k_AB, 3*k_AU
-    RyR_OI(a~3) + Ca2@OUT <-> RyR_OI(a~4) 1*k_AB, 4*k_AU
-    RyR_OI(i~0) + Ca2@OUT <-> RyR_OI(i~1) 4*k_IO, 1*k_IU
-    RyR_OI(i~1) + Ca2@OUT <-> RyR_OI(i~2) 3*k_IO, 2*k_IU
-    RyR_OI(i~2) + Ca2@OUT <-> RyR_OI(i~3) 2*k_IO, 3*k_IU
-    RyR_OI(i~3) + Ca2@OUT <-> RyR_OI(i~4) 1*k_IO, 4*k_IU
-    RyR_O(a~0) -> RyR_C(a~0) beta
-    RyR_O(a~1) -> RyR_C(a~1) beta
-    RyR_O(a~2) -> RyR_C(a~2) beta
-    RyR_O(a~3) -> RyR_C(a~3) beta
-    RyR_C(a~4) <-> RyR_O(a~4) alpha, beta
-    RyR_CI <-> RyR_OI alpha, beta
-    RyR_CI(i~0) -> RyR_C(i~0) gamma
-    RyR_C(i~1) <-> RyR_CI(i~1) delta1, gamma
-    RyR_C(i~2) <-> RyR_CI(i~1) delta1, gamma
-    RyR_C(i~3) <-> RyR_CI(i~3) delta1, gamma
-    RyR_C(i~4) <-> RyR_CI(i~4) delta1, gamma
-    RyR_OI(i~0) -> RyR_O(i~0) gamma
-    RyR_O(i~1) <-> RyR_OI(i~1) delta, gamma
-    RyR_O(i~2) <-> RyR_OI(i~2) delta, gamma
-    RyR_O(i~3) <-> RyR_OI(i~3) delta, gamma
-    RyR_O(i~4) <-> RyR_OI(i~4) delta, gamma
-    Ca2_ER@IN + RyR_O <-> RyR_O + Ca2@OUT k_FluxRyR, k_FluxRyR
 end reaction rules
 
