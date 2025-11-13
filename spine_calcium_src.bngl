@@ -1,10 +1,17 @@
 # WARNING: This is an automatically generated file and will be overwritten
 #          by CellBlender on the next model export.
-
+#TODO
+#figure out this option
 # File uses standard MCell units for bimolecular reactions (M^-1*s^-1 and um^2*N^-1*s^-1).
 # When used with MCell, global option Model.config.use_bng_units must be set to False.
 # WARNING: Simulation with BioNetGen won't produce correct results because BioNetGen uses different units than MCell.
-
+#TODO:
+#remove exponential decay of Ca conc
+#add calcium buffers
+#Add calmodulin ffs
+# SERCA to SERCA3
+#RyR3 in the spine
+#RyR2 in the dendrite
 begin parameters
     Ca_cyto_IC 1e-7
 
