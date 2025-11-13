@@ -26,7 +26,7 @@ bngl_params = m.bngl_utils.load_bngl_parameters(os.path.join(MODEL_PATH, 'model.
 # ---- simulation setup ----
 
 if not_defined('ITERATIONS'):
-    ITERATIONS = 200000
+    ITERATIONS = 2000000
 
 if not_defined('TIME_STEP'):
     TIME_STEP = 1e-06
@@ -42,7 +42,7 @@ if not_defined('SEED'):
 
 SURFACE_GRID_DENSITY = 10000
 
-SAMPLING_PERIODICITY = 10000
+SAMPLING_PERIODICITY = 100000
 
 ONLY_EXPORT_BNGL = False
 
