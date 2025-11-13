@@ -92,20 +92,14 @@ model.config.time_step = TIME_STEP
 model.config.seed = SEED
 model.config.total_iterations = ITERATIONS
 
-model.config.surface_grid_density = SURFACE_GRID_DENSITY
-
-#model.warnings.high_reaction_probability = m.WarningLevel.IGNORE
-model.notifications.rxn_and_species_report = True
+model.warnings.high_reaction_probability = m.WarningLevel.WARNING
+model.notifications.rxn_and_species_report = False
 model.notifications.rxn_probability_changed = True
 
-model.config.partition_dimension = 0.2
-model.config.subpartition_dimension = 0.05
+model.config.partition_dimension = 20
+model.config.subpartition_dimension = 0.1
 
 # ---- default configuration overrides ----
-
-if customization and 'custom_config' in dir(customization):
-    # user-defined model configuration
-    customization.custom_config(model)
 
 # ---- add components ----
 
@@ -117,22 +111,20 @@ model.add_subsystem(subsystem.subsystem)
 model.add_instantiation(instantiation.instantiation)
 model.add_observables(observables.observables)
 
+if customization and 'custom_config' in dir(customization):
+    # user-defined model configuration
+    customization.custom_config(model)
+
 # ---- initialization and execution ----
 
 if customization and 'custom_init_and_run' in dir(customization):
     customization.custom_init_and_run(model)
 else:
     model.initialize()
-    
-    if ONLY_EXPORT_BNGL:
-        model.export_to_bngl('exported.bngl', m.BNGSimulationMethod.NF)
-        model.end_simulation()
-        sys.exit(0)
-    
+
     if DUMP:
         model.dump_internal_state()
 
-    model.export_data_model("data_model.json")
     if EXPORT_DATA_MODEL and model.viz_outputs:
         model.export_data_model()
 
