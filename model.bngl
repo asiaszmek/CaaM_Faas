@@ -70,9 +70,9 @@ begin molecule types
 end molecule types
 
 begin seed species
-  CaM(C~0,N~0,ryr2)@box   123*uM_in_um3
-  Ca()@box     1.88*uM_in_um3
-  RyR2(r,l,Ca~0,cam,S~0)@box 10 # Rangamani 2025
+  CaM(C~0,N~0,ryr2)@box   3*uM_in_um3
+  Ca()@box     1*uM_in_um3
+  RyR2(r!1,l!4,Ca~0,cam,S~0)@box.RyR2(r!2,l!1,Ca~0,cam,S~0)@box.RyR2(r!3,l!2,Ca~0,cam,S~0)@box.RyR2(r!4,l!3,Ca~0,cam,S~0)@box 8 # Rangamani 2025
 end seed species
 
 begin observables
