@@ -1,0 +1,12 @@
+09.12.2025
+Start afresh with the newest Rangamani publication (J Phys 2025, first author Hernandez)
+There are thingst to be done:
+1. Change SERCA2 to SERCA3, because spines exhibit SERCA3 (David Holcman's publications). SERCA3 has lower affinity to cytosolic Ca and it's clearance rate is faster. https://doi.org/10.1016/j.ceca.2025.103079
+This SERCA implementation is Higgin's and Sneyd's 2006 and it's a buffering pump.
+It might be reasonable to change it to a simple model of SERCA pump, because the evidence shows that luminal calcium does not affect SERCA3.
+2. Add explicit calmodulin. R. does not implement explicit buffering molecules only pumps, possibly to speed up simulations in MCell. Probably I should test if adding calbindin and fixed buffer instead of the exponential decay would change much in terms of calcium dynamics? Or just stick to the exponential decay for now and perform final simulations with actual calcium buffers.
+3. Replace RyR model with RyR3 with CaM.
+
+This is for now.
+
+
